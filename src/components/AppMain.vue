@@ -9,6 +9,8 @@ export default {
             results: [],
             error: false,
             searchMovie: '',
+            languages: 'https://www.unknown.nu/flags/images/', //uk-100   //https://www.unknown.nu/flags/
+            lan: [],
         }
     },
 
@@ -22,6 +24,11 @@ export default {
                     console.log(this.results);
                     // console.log(this.results[0].title);
                     // this.error = false;
+                    this.results.forEach(result => {
+                        // console.log(result);
+                        this.lan = result.original_language
+                        //console.log(this.lan);
+                    })
                 })
                 .catch((error) => {
                     console.error(error);
@@ -36,16 +43,16 @@ export default {
             console.log(this.searchMovie);
 
             this.getInfoCards(url);
+        },
+
+        flags() {
+
         }
     },
 
     created() {
         this.getInfoCards(this.base_api_url)
     },
-
-    mounted() {
-
-    }
 }
 </script>
 
@@ -59,7 +66,9 @@ export default {
             <ul v-for="result in results" :key="result.id + '_result'">
                 <li>Title: {{ result.title }}</li>
                 <li>Original Title: {{ result.original_title }}</li>
-                <li>Language: {{ result.original_language }}</li>
+                <li>Language: {{ result.original_language }}
+                    <img :src="languages + result.original_language + '-100'" alt="bandiera" class="flag"> <!--ua.png-->
+                </li>
                 <li>Vote: {{ result.vote_average }}</li>
             </ul>
         </div>
@@ -67,4 +76,10 @@ export default {
     </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.flag {
+    width: 25px;
+    border: 1px solid rgb(174, 173, 173);
+    margin-left: 0.25rem;
+}
+</style>
