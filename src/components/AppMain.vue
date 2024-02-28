@@ -37,10 +37,12 @@ export default {
             console.log(url_movie);
             console.log(this.searchMovieandSerie);
 
-            this.getInfoCards(url_movie);
+            this.getInfoCards(url_movie); //funziona primo questo e sparisce
 
             const url_serie = `${this.base_api_url_serie}&query=${this.searchMovieandSerie}`;
-            this.getInfoCards(url_serie);
+
+            this.getInfoCards(url_serie); //dopo funziona questo e rimane
+
         },
     },
 
@@ -58,8 +60,8 @@ export default {
         </div>
         <div>
             <ul v-for="result in results" :key="result.id + '_result'">
-                <li>Title: {{ result.title }} {{ result.name }} </li>
-                <li>Original Title: {{ result.original_title }} {{ result.original_name }}</li>
+                <li>Title: {{ result.title || result.name }} </li>
+                <li>Original Title: {{ result.original_title || result.original_name }}</li>
                 <li>Language: {{ result.original_language }}
                     <img :src="languages + result.original_language + '-100'" alt="bandiera" class="flag"> <!--ua.png-->
                 </li>
