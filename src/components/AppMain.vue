@@ -1,13 +1,70 @@
 <script>
+import axios from 'axios';
 export default {
-    name: 'AppMain'
+    name: 'AppMain',
+
+    data() {
+        return {
+            base_api_url: 'https://api.themoviedb.org/3/search/movie?api_key=d7aac37017d487828e63f03c5d26591d', //&query=coraline
+            results: [],
+            error: false,
+            searchMovie: '',
+        }
+    },
+
+    methods: {
+        getInfoCards(url) {
+            axios
+                .get(url).then((response) => {
+                    //console.log(response);
+                    //console.log(response.data.results);
+                    this.results = response.data.results
+                    console.log(this.results);
+                    // console.log(this.results[0].title);
+                    // this.error = false;
+                })
+                .catch((error) => {
+                    console.error(error);
+                    this.error = error.message;
+                })
+        },
+
+        filterResults() {
+            //&query=coraline
+            const url = `${this.base_api_url}&query=${this.searchMovie}`;
+            console.log(url);
+            console.log(this.searchMovie);
+
+            this.getInfoCards(url);
+        }
+    },
+
+    created() {
+        this.getInfoCards(this.base_api_url)
+    },
+
+    mounted() {
+
+    }
 }
 </script>
 
 <template>
-    <div>
-
-    </div>
+    <main>
+        <div>
+            <input type="text" placeholder="Film Here" v-model="searchMovie">
+            <button @click="filterResults">Search</button>
+        </div>
+        <div>
+            <ul v-for="result in results" :key="result.id + '_result'">
+                <li>Title: {{ result.title }}</li>
+                <li>Original Title: {{ result.original_title }}</li>
+                <li>Language: {{ result.original_language }}</li>
+                <li>Vote: {{ result.vote_average }}</li>
+            </ul>
+        </div>
+        <div v-if="error">{{ error }}</div>
+    </main>
 </template>
 
 <style scoped></style>
