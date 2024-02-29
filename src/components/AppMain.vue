@@ -14,7 +14,7 @@ export default {
             languages: 'https://www.unknown.nu/flags/images/', //uk-100   //https://www.unknown.nu/flags/
             url_img: 'https://image.tmdb.org/t/p/w200/',
             url_no_img: 'https://static.thenounproject.com/png/340719-200.png',
-            stars: '',
+            // stars: [],
         }
     },
 
@@ -39,6 +39,7 @@ export default {
             axios
                 .get(url).then((response) => {
                     this.results_serie = response.data.results
+
                     for (let index = 0; index < this.results_serie.length; index++) { //for per ciclare dentro l'array di serie
                         const list_serie = this.results_serie[index];
                         this.results.push(list_serie) //questa soluzione fa aparire la lista delle serie sotto della lista dei film, in tanto cosi
@@ -68,20 +69,23 @@ export default {
 
         vote_star(numero) {
             console.log(numero);
-            const num_around = Math.round(numero)
-            return num_around * 5 / 10;
+            const num_round = Math.round(numero)
+            return Math.round(num_round * 5 / 10);
         },
-    },
-    /*
-        created() {
-            for (let index = 0; index < this.results_serie.length; index++) { //for per ciclare dentro l'array di serie
-                const result = this.results_serie[index];
-                this.stars = this.vote_star(result.vote_average, [1, 10], [1, 5])
-                console.log(stars);
-                return this.stars
+
+        /*stamp_stars() {
+            for (let i = 0; i < this.results.length; i++) { //for per ciclare dentro l'array di serie
+                const result = this.results[i];
+                this.stars = this.vote_star(result.vote_average)
+
+                return console.log(this.stars);
             }
-    
-        },*/
+        }*/
+    },
+
+    created() {
+
+    },
 }
 </script>
 
@@ -102,15 +106,46 @@ export default {
                     <img :src="languages + result.original_language + '-100'" alt="bandiera" class="flag"> <!--ua.png-->
                 </li>
 
-                <li> Vote: {{ vote_star(result.vote_average) }} </li>
-                <li>
-                    <i class="fa-regular fa-star"></i>
+                <li> Vote: {{ vote_star(result.vote_average) }}</li>
+                <li v-if="vote_star(result.vote_average) <= 1">
+                    <i class="fa-solid fa-star"></i>
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
                 </li>
-                <!--star <i class="fa-regular fa-star"></i>  <i class="fa-solid fa-star"></i>-->
+
+                <li v-if="vote_star(result.vote_average) === 2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </li>
+
+                <li v-if="vote_star(result.vote_average) === 3">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </li>
+
+                <li v-if="vote_star(result.vote_average) === 4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </li>
+
+                <li v-if="vote_star(result.vote_average) === 5">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </li>
             </ul>
         </div>
         <div v-if="error">{{ error }}</div>
@@ -127,10 +162,10 @@ export default {
 .cont-img {
     width: 100%;
     height: 320px;
+    background-color: rgb(150, 2, 2);
 
     >img {
         width: 100%;
-        height: 100%;
     }
 }
 </style>
