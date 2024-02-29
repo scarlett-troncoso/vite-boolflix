@@ -13,7 +13,8 @@ export default {
             searchMovieandSerie: '',
             languages: 'https://www.unknown.nu/flags/images/', //uk-100   //https://www.unknown.nu/flags/
             url_img: 'https://image.tmdb.org/t/p/w200/',
-            url_no_img: 'https://static.thenounproject.com/png/340719-200.png'
+            url_no_img: 'https://static.thenounproject.com/png/340719-200.png',
+            stars: '',
         }
     },
 
@@ -64,10 +65,23 @@ export default {
             this.getInfoCards(url_movie);
             this.getInfoCardsSerie(url_serie);
         },
-    },
 
-    created() {
+        vote_star(numero) {
+            console.log(numero);
+            const num_around = Math.round(numero)
+            return num_around * 5 / 10;
+        },
     },
+    /*
+        created() {
+            for (let index = 0; index < this.results_serie.length; index++) { //for per ciclare dentro l'array di serie
+                const result = this.results_serie[index];
+                this.stars = this.vote_star(result.vote_average, [1, 10], [1, 5])
+                console.log(stars);
+                return this.stars
+            }
+    
+        },*/
 }
 </script>
 
@@ -87,7 +101,16 @@ export default {
                 <li>Language: {{ result.original_language }}
                     <img :src="languages + result.original_language + '-100'" alt="bandiera" class="flag"> <!--ua.png-->
                 </li>
-                <li>Vote: {{ result.vote_average }}</li>
+
+                <li> Vote: {{ vote_star(result.vote_average) }} </li>
+                <li>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </li>
+                <!--star <i class="fa-regular fa-star"></i>  <i class="fa-solid fa-star"></i>-->
             </ul>
         </div>
         <div v-if="error">{{ error }}</div>
