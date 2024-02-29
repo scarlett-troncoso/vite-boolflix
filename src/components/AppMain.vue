@@ -8,9 +8,12 @@ export default {
             base_api_url: 'https://api.themoviedb.org/3/search/movie?api_key=d7aac37017d487828e63f03c5d26591d', //&query=coraline
             base_api_url_serie: 'https://api.themoviedb.org/3/search/tv?api_key=d7aac37017d487828e63f03c5d26591d',
             results: [],
+            results_serie: {},
             error: false,
             searchMovieandSerie: '',
             languages: 'https://www.unknown.nu/flags/images/', //uk-100   //https://www.unknown.nu/flags/
+            url_img: 'https://image.tmdb.org/t/p/w200/',
+            url_no_img: 'https://static.thenounproject.com/png/340719-200.png'
         }
     },
 
@@ -31,35 +34,54 @@ export default {
                 })
         },
 
+        getInfoCardsSerie(url) {
+            axios
+                .get(url).then((response) => {
+                    this.results_serie = response.data.results
+                    for (let index = 0; index < this.results_serie.length; index++) { //for per ciclare dentro l'array di serie
+                        const list_serie = this.results_serie[index];
+                        this.results.push(list_serie) //questa soluzione fa aparire la lista delle serie sotto della lista dei film, in tanto cosi
+
+                        //questa e una posibile PER STAMPARE IN PAGINA PRIMA LE SERIE in caso che queste abbiano IL NOME PIU ESATTO DA QUELLO CERCATO
+
+                        //return this.searchMovieandSerie === list_serie.name || list_serie.original_name ? this.results.unshift(list_serie) : this.results.push(list_serie)
+                    }
+                    console.log(this.results);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    this.error = error.message;
+                })
+        },
+
         filterResults() {
             //&query=coraline
             const url_movie = `${this.base_api_url}&query=${this.searchMovieandSerie}`;
-            console.log(url_movie);
+            const url_serie = `${this.base_api_url_serie}&query=${this.searchMovieandSerie}`;
+            //console.log(url_movie);
             console.log(this.searchMovieandSerie);
 
-            this.getInfoCards(url_movie); //funziona primo questo e sparisce
-
-            const url_serie = `${this.base_api_url_serie}&query=${this.searchMovieandSerie}`;
-
-            this.getInfoCards(url_serie); //dopo funziona questo e rimane
-
+            this.getInfoCards(url_movie);
+            this.getInfoCardsSerie(url_serie);
         },
     },
 
     created() {
-        this.getInfoCards(this.base_api_url, this.base_api_url_serie)
     },
 }
 </script>
 
 <template>
-    <main>
+    <main class="container">
         <div>
             <input type="text" placeholder="Search Movie or Serie" v-model="searchMovieandSerie">
             <button @click="filterResults">Search</button>
         </div>
-        <div>
-            <ul v-for="result in results" :key="result.id + '_result'">
+        <div class="row">
+            <ul v-for="result in results" :key="result.id + '_result'" class="col-5 card">
+                <div class="cont-img">
+                    <img :src="result.poster_path === null ? url_no_img : url_img + result.poster_path" alt="poster:">
+                </div>
                 <li>Title: {{ result.title || result.name }} </li>
                 <li>Original Title: {{ result.original_title || result.original_name }}</li>
                 <li>Language: {{ result.original_language }}
@@ -77,5 +99,15 @@ export default {
     width: 25px;
     border: 1px solid rgb(174, 173, 173);
     margin-left: 0.25rem;
+}
+
+.cont-img {
+    width: 100%;
+    height: 320px;
+
+    >img {
+        width: 100%;
+        height: 100%;
+    }
 }
 </style>
