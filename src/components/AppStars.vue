@@ -161,4 +161,30 @@ export default {
                 </li>-->
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.stars_outer {
+position: relative;
+display: inline-block;
+    > i {
+        color: #fff8;
+        /*-webkit-text-stroke: 1px #908f8f;
+        /*-webkit-text-stroke: 1px transparent;*/
+    }
+
+}
+
+.stars_inner {
+position: absolute;
+top: 0;
+left: 0;
+
+overflow: hidden;
+
+>i {
+    color: gold;
+}
+}
+
+
+</style>
