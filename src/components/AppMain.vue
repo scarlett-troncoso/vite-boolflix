@@ -1,70 +1,84 @@
 <script>
 import { store } from '../store';
-import AppStars from './AppStars.vue';
+import AppCard from './AppCard.vue';
 
 export default {
     name: 'AppMain',
     components: {
-        AppStars,
+        AppCard
     },
 
     data() {
         return {
            store, 
-
-            languages: 'https://www.unknown.nu/flags/images/', //uk-100   //https://www.unknown.nu/flags/
-            url_img: 'https://image.tmdb.org/t/p/w200/',
+           url_img: 'https://image.tmdb.org/t/p/w200/',
             url_no_img: 'https://static.thenounproject.com/png/340719-200.png',
         }
     },
 
-    /*
-    created(){
-        this.video()
-    }*/
-    
+    created () {
+        store.getInfoCards(store.base_api_url);
+        store.getInfoCardsSerie(store.base_api_url_serie)
+    }
 }
 </script>
 
 <template>
-    <main class="container">
-        
+    <main class="container">   
         <div class="row">
-            <ul v-for="result in store.results" :key="result.id + '_result'" class="col-5 card">
-                <div class="cont-img">
+            <ul v-for="result in store.results" :key="result.id + '_result'" class=" col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2 card">
+                <div class="cont-img-film">
+
                     <img :src="result.poster_path === null ? url_no_img : url_img + result.poster_path" alt="poster:">
-                </div>
-                <div class="details_film">
-                    <li>Title: {{ result.title || result.name }} </li>
-                    <li>Original Title: {{ result.original_title || result.original_name }}</li>
-                    <li>Language: {{ result.original_language }}
-                    <img :src="languages + result.original_language + '-100'" alt="bandiera" class="flag"> <!--ua.png-->
-                    </li>
-                <!--<li> Vote: {{ vote_star(result.vote_average) }}</li> -->
-                    <AppStars :vote_average="result.vote_average"></AppStars>
-                    <li>Overview: {{ result.overview }}</li>
-                </div>        
+                    
+                    <div class="contFilm">
+                        <AppCard :result="result"></AppCard>
+                    </div>
+
+                </div>          
             </ul>
         </div>
+
         <div v-if="store.error">{{ store.error }}</div>
     </main>
 </template>
 
 <style scoped>
-.flag {
-    width: 25px;
-    border: 1px solid rgb(174, 173, 173);
-    margin-left: 0.25rem;
+img:hover{
+    opacity: 0;
 }
 
-.cont-img {
+.cont-img-film {
+    position: relative;
+    display: inline-block;
     width: 100%;
-    height: 320px;
-    background-color: rgb(150, 2, 2);
-
+    height: 385px;
+    
     >img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-color: rgb(194, 193, 193);
+        object-fit: cover;
     }
+
+    >.contFilm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    /*height: 385px;*/
+    background-color: rgb(188, 225, 213)
 }
+};
+
+
+
+
 
 </style>

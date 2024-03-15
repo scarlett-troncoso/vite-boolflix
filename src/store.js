@@ -47,7 +47,7 @@ export const store = reactive({
                 }
                 console.log(this.results);
                 
-                console.log('CONSOLE VOTE', this.vote);
+               // console.log('CONSOLE VOTE', this.vote); per stelle in modo dinamico
             })
             .catch((error) => {
                 console.error(error);

@@ -26,20 +26,20 @@ export default {
 </script>
 
 <template>
-        <div class="details_film">
-            <li>Title: {{ result.title || result.name }} </li>
-            
-            <li>Original Title: {{ result.original_title || result.original_name }}</li>
-            
-            <li>Language: {{ result.original_language }}
-                <img :src="languages + result.original_language + '-100'" alt="bandiera" class="flag"> <!--ua.png-->
-            </li>
+        
+        <li>Title: {{ result.title || result.name }} </li>
+        
+        <li>Original Title: {{ result.original_title || result.original_name }}</li>
+        
+        <li>Language: {{ result.original_language }}
+            <img :src="languages + result.original_language + '-100'" alt="bandiera" class="flag"> <!--ua.png-->
+        </li>
 
-        <!--<li> Vote: {{ vote_star(result.vote_average) }}</li> -->
-            <AppStars :vote_average="result.vote_average"></AppStars>
-            
-            <li>Overview: {{ result.overview }}</li>
-        </div>        
+    <!--<li> Vote: {{ vote_star(result.vote_average) }}</li> -->
+        <AppStars :vote_average="result.vote_average"></AppStars>
+        
+        <li>Overview: {{ result.overview }}</li>
+       
 </template>
 
 <style scoped>
