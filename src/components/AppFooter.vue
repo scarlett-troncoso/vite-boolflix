@@ -5,9 +5,25 @@ export default {
 </script>
 
 <template>
-    <footer class="container">
-        Footer
+    <footer>
+       <div class="container cont-footer">
+            Footer
+       </div> 
     </footer>
 </template>
 
-<style scoped></style>
+<style scoped>
+footer{
+    background-color: black;
+    width: 100%;
+    padding: 1.5rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+
+    >.cont-footer{
+        color: white;
+    }
+}
+</style>

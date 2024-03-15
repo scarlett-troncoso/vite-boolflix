@@ -7,15 +7,14 @@ export default {
     data () {
         return{
             store,
+            url_logo: 'https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png'
         }
     },
 
     methods: {
         filterResults() {
-            //&query=coraline
             const url_movie = `${this.store.base_api_url}&query=${this.store.searchMovieandSerie}`;
             const url_serie = `${this.store.base_api_url_serie}&query=${this.store.searchMovieandSerie}`;
-            //console.log(url_movie);
             console.log(this.store.searchMovieandSerie);
 
             this.store.getInfoCards(url_movie);
@@ -26,12 +25,67 @@ export default {
 </script>
 
 <template>
-    <header class="container">
-        <div>
-            <input type="text" placeholder="Search Movie or Serie" v-model="store.searchMovieandSerie">
-            <button @click="filterResults">Search</button>
+    <header>
+        <div class="container cont-header">
+            <div class="logo">
+                <img :src="url_logo" alt="Logo_Boolflix">
+            </div>
+
+            <div class="cont-search">
+                <input type="text" placeholder=" Search Movie or Serie" v-model="store.searchMovieandSerie" class="input-search">
+                <button @click="filterResults">Search</button>
+            </div>
         </div>
+        
     </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+header{
+    background-color: black;
+    > .cont-header{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.logo{
+    width: 20%;
+    padding: 1.5rem 0 1.5rem 0;
+
+    >img{
+        width: 100%;
+    }
+}
+
+.cont-search{
+    display: flex;
+    padding: 1.5rem 0 1.5rem 0;
+    align-items: center;
+
+    >.input-search,
+    button {
+        height: 2rem;
+        border: 1px solid grey;
+        padding: 0.5rem;
+        
+    }
+
+    >.input-search {
+        border-radius: 6px 0 0 6px;
+        margin-right: 2px;
+    }
+
+    > button{
+        border-radius: 0 6px 6px 0;
+        background-color: rgb(167, 179, 191);
+    }
+
+    > button:hover{
+        font-size: 14px;
+        scale: 105%;
+        background-color: rgb(149, 161, 174);
+        color: rgb(35, 35, 35);
+    }
+}
+</style>

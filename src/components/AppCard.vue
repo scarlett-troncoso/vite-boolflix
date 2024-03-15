@@ -17,11 +17,6 @@ export default {
         }
     },
 
-    /*
-    created(){
-        this.video()
-    }*/
-    
 }
 </script>
 
@@ -38,7 +33,8 @@ export default {
     <!--<li> Vote: {{ vote_star(result.vote_average) }}</li> -->
         <AppStars :vote_average="result.vote_average"></AppStars>
         
-        <li>Overview: {{ result.overview }}</li>
+        <li class="overview" v-if="result.overview.length<271">Overview: {{ result.overview }}</li>
+        <li class="overview" v-else >Overview: {{ result.overview.substring(0, 271) + "..." }}</li>
        
 </template>
 
