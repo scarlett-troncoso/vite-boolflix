@@ -5,185 +5,91 @@ export default {
     data() {
         return {
         
-            vote: [], // PER STELLE IN MODO DINAMICO
-            // rating: [], // PER STELLE IN MODO DINAMICO
-            /*stars: [   // PER STELLE IN MODO DINAMICO
-                {        
-                'star': 5,
-                'count': 5
-            },
-            {        
-                'star': 4,
-                'count': 4
-            },
-            {        
-                'star': 3,
-                'count': 3
-            },
-            {        
-                'star': 2,
-                'count': 2
-            },
-            {        
-                'star': 1,
-                'count': 1
-            },
-            {        
-                'star': 5,
-                'count': 5
-            },
-            
-            ]*/
+            votes: [], // PER STELLE IN MODO DINAMICO
+            starSolid: [],
+            starRegular: [],
         }
     },
-
-    
 
     methods: {
         vote_star(num) {
             console.log(num);
             const num_round = Math.round(num)
-            return Math.round(num_round * 5 / 10) ;
+            this.votes.push(Math.round(num_round * 5 / 10)) },
+
+        stars_rating_solid(numVote) {
+            for (let i = 0; this.starSolid.length < numVote; i++) {
+                this.starSolid.push('fa-solid fa-star')    
+            }
         },
 
-        /* PROVA PER FARE STELLE IN MODO DINAMICO
-        video(){
-
-            let total_rating = 0,
-            rating_based_on_stars = 0;
-            /*
-            this.stars.forEach((st, index) => {
-            total_rating += st.count;
-            rating_based_on_stars += st.count * st.star;
-            });
-            let rating_average = (rating_based_on_stars / total_rating);
-                        this.rating = "width:" + (rating_average / 5) * 100 + "%";
-                        console.log(rating_based_on_stars);
-                        console.log(total_rating);*/
-
-            /*this.vote.forEach((vo, index) => {
-                total_rating += vo;
-                rating_based_on_stars += vo * vo
-                console.log(vo);
-            }); */
-/*
-            this.stars.forEach((st, index) => {
-                st[0].push()
-            })*/
-
-            /* let rating_average = (rating_based_on_stars / total_rating);
-                        this.rating = "width:" + (rating_average / 5) * 100 + "%";
-                        console.log(rating_based_on_stars);
-                        console.log(total_rating);
-
-           
-        //console.log(rating_average);
-        
-        }*/
+        stars_rating_regular() {
+            for (let i = 0; this.starRegular.length < 5; i++) {
+                this.starRegular.push('fa-regular fa-star')
+            }
+        }
     },
 
-    /*
     created(){
-        this.video()
-    }*/
-    
+        this.vote_star(this.vote_average);
+
+        this.stars_rating_solid(this.votes);
+
+        this.stars_rating_regular();
+    }
 }
+    
 </script>
 
 <template>
-    <li v-if="vote_star(vote_average) <= 1">
-                    Vote:
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </li>
+        <li > 
 
-                <li v-if="vote_star(vote_average) === 2">
-                    Vote:
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </li>
+            <div >
 
-                <li v-if="vote_star(vote_average) === 3">
-                    Vote:
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </li>
+                <div v-for="vote in votes">
+                    vote: {{ vote }}
+                </div>
 
-                <li v-if="vote_star(vote_average) === 4">
-                    Vote:
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </li>
+            </div>
 
-                <li v-if="vote_star(vote_average) === 5">
-                    Vote:
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </li>
-
-<!-- TEMPLATE PER STELLE IN MODO DINAMICO
-                <li> 
-                    <div>{{ result.vote_average }} </div>
-                    <div>
-                        {{ vote_star(result.vote_average) }}
-                    </div>
-                    <div>
-                        <li class="stars_outer">
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                                <li class="stars_inner" :style="rating">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </li>
-                        </li>           
-                    </div>
-                </li>-->
+            <div class="cont-stars">
+                <li class="stars_outer" >
+                    <i v-for="regular in starRegular" :class="regular"></i>
+                    <!--<i class="fa-regular fa-star"></i>-->
+                        
+                        <li class="stars_inner">
+                            <i v-for="solid in starSolid" :class="solid"></i>
+                            <!--<i class="fa-solid fa-star"></i>-->
+                        </li>
+                </li>           
+            </div>
+        </li> 
 </template>
 
 <style scoped>
 
+.cont-stars {
+    display: inline-block;
+    position: relative;
+}
+
 .stars_outer {
-position: relative;
 display: inline-block;
     > i {
-        color: #fff8;
-        /*-webkit-text-stroke: 1px #908f8f;
-        /*-webkit-text-stroke: 1px transparent;*/
+        font-weight: 0.5px;
+        color: rgba(181, 180, 180, 0.263);
     }
-
 }
 
 .stars_inner {
 position: absolute;
+display: inline-block;
 top: 0;
 left: 0;
 
-overflow: hidden;
-
->i {
-    color: gold;
-}
+    >i {
+        color: gold;
+    }
 }
 
 
