@@ -18,7 +18,8 @@ export default {
 
     created () {
         store.getInfoCards(store.base_api_url);
-        store.getInfoCardsSerie(store.base_api_url_serie)
+        store.getInfoCardsSerie(store.base_api_url_serie);
+        //store.getCastMovie(store.api_cast_movie)
     }
 }
 </script>
@@ -82,7 +83,6 @@ img:hover{
         background-color: rgb(34, 34, 34);
         padding: 0.5rem;
         color: rgb(178, 178, 178);
-        line-height: 1.5rem;
     }
 };
 

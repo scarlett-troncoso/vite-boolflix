@@ -7,7 +7,7 @@ export default {
     data () {
         return{
             store,
-            url_logo: 'https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png'
+            url_logo: 'https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png',
         }
     },
 
@@ -16,7 +16,6 @@ export default {
             const url_movie = `${this.store.base_api_url}&query=${this.store.searchMovieandSerie}`;
             const url_serie = `${this.store.base_api_url_serie}&query=${this.store.searchMovieandSerie}`;
             console.log(this.store.searchMovieandSerie);
-
             this.store.getInfoCards(url_movie);
             this.store.getInfoCardsSerie(url_serie);
         },
@@ -27,6 +26,7 @@ export default {
 <template>
     <header>
         <div class="container cont-header">
+            
             <div class="logo">
                 <img :src="url_logo" alt="Logo_Boolflix">
             </div>

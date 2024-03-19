@@ -13,7 +13,7 @@ export default {
 
     methods: {
         vote_star(num) {
-            console.log(num);
+            //console.log(num);
             const num_round = Math.round(num)
             this.votes.push(Math.round(num_round * 5 / 10)) },
 
@@ -43,14 +43,7 @@ export default {
 
 <template>
         <li > 
-
-            <div >
-
-                <div v-for="vote in votes">
-                    vote: {{ vote }}
-                </div>
-
-            </div>
+            <span>Vote: </span>
 
             <div class="cont-stars">
                 <li class="stars_outer" >
@@ -67,7 +60,6 @@ export default {
 </template>
 
 <style scoped>
-
 .cont-stars {
     display: inline-block;
     position: relative;

@@ -35,8 +35,13 @@ body {
       width: 50%;
     }
 
+    .contFilm{
+        font-size: large;
+        line-height: 1.5rem;
+    }
+
     .overview {
-        font-size: xx-small;
+        line-height: 1.5rem;
     }
   }
   
@@ -45,8 +50,12 @@ body {
         width: calc(100% / 12* 4);
     }
 
-    .overview {
+    .contFilm{
         font-size: x-small;
+    }
+
+    .overview {
+        line-height: 0.75rem;
     }
 }
 
@@ -55,24 +64,36 @@ body {
         width: calc(100% / 12* 3);
     }
 
+    .contFilm{
+        font-size: x-small;
+    }
+
     .overview {
-        font-size: small;
+        line-height: 0.75rem;
     }
 }
-/*
-@media screen and (min-width: 1200px) {
-    .col-xl-3 {
-        width: calc(100% / 12* 3);
-        }
-}*/
 
+@media screen and (min-width: 1200px) {
+    
+    .contFilm{
+        font-size: small;
+    }
+    
+    .overview {
+        line-height: 1.25rem;
+    }
+}
 
 @media screen and (min-width: 1440px) {
     .col-xxl-3 {
         width: calc(100% / 12* 3);
     }
 
-    .overview {
+    .contFilm{
         font-size: medium;
+    }
+
+    .overview {
+       line-height: 1.5rem;
     }
 }
