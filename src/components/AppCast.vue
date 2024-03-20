@@ -10,7 +10,6 @@ export default {
     data() {
         return {
             store,
-            url_cast_movie: '',
         }
     },
 
@@ -38,10 +37,10 @@ export default {
         <div v-for="onlyCast in this.store.resultsCast">
             
             <div v-if="onlyCast.id === result.id" class="cont-cast">
-                Cast:
+                <!--Cast:
                     <li v-for="oneCast in onlyCast.cast">
-                   <!-- {{  oneCast.name }} -->
-                    </li>
+                    {{  oneCast.name }} 
+                    </li>-->
             </div>
         </div>
 </template>

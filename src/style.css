@@ -36,12 +36,23 @@ body {
     }
 
     .contFilm{
-        font-size: large;
+        font-size: 13px;
         line-height: 1.5rem;
     }
 
     .overview {
-        line-height: 1.5rem;
+        line-height: 1rem;
+    }
+  }
+
+@media screen and (min-width: 668px) {
+    .contFilm{
+        font-size: 16px;
+        line-height: 1.75rem;
+    }
+
+    .overview {
+        line-height: 1.25rem;
     }
   }
   
@@ -51,11 +62,23 @@ body {
     }
 
     .contFilm{
-        font-size: x-small;
+        font-size: 13px;
+        line-height: 1rem;
     }
 
     .overview {
-        line-height: 0.75rem;
+        line-height: 1rem;
+    }
+}
+
+@media screen and (min-width: 880px) {
+    .contFilm{
+        font-size: 14px;
+        line-height: 1.5rem;
+    }
+
+    .overview {
+        line-height: 1.15rem;
     }
 }
 
@@ -65,18 +88,18 @@ body {
     }
 
     .contFilm{
-        font-size: x-small;
+        font-size: small;
     }
 
     .overview {
-        line-height: 0.75rem;
+        line-height: 1rem;
     }
 }
 
 @media screen and (min-width: 1200px) {
     
     .contFilm{
-        font-size: small;
+        font-size: 15px;
     }
     
     .overview {

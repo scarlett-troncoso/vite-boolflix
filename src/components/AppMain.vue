@@ -10,16 +10,15 @@ export default {
 
     data() {
         return {
-           store, 
-           url_img: 'https://image.tmdb.org/t/p/w200/',
-            url_no_img: 'https://static.thenounproject.com/png/340719-200.png',
+            store, 
+            url_img: 'https://image.tmdb.org/t/p/w200/',
+            url_no_img: 'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg?w=826', // 'https://static.thenounproject.com/png/340719-100.png'
         }
     },
 
     created () {
         store.getInfoCards(store.base_api_url);
         store.getInfoCardsSerie(store.base_api_url_serie);
-        //store.getCastMovie(store.api_cast_movie)
     }
 }
 </script>
@@ -59,7 +58,6 @@ img:hover{
     display: inline-block;
     width: 100%;
     aspect-ratio: 0.7;
-    background-color: rgb(174, 137, 190);
     
     >img {
         position: absolute;

@@ -36,8 +36,8 @@ export default {
         
         <AppStars :vote_average="result.vote_average"></AppStars> <!--<li> Vote: {{ vote_star(result.vote_average) }}</li> -->
         
-        <li class="overview" v-if="result.overview.length<271">Overview: {{ result.overview }}</li>
-        <li class="overview" v-else >Overview: {{ result.overview.substring(0, 271) + "..." }}</li>
+        <li class="overview" v-if="result.overview.length<235">Overview: {{ result.overview }}</li>
+        <li class="overview" v-else >Overview: {{ result.overview.substring(0, 235) + "..." }}</li>
        
 </template>
 
