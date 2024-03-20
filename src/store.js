@@ -33,7 +33,7 @@ export const store = reactive({
 
                 for (let index = 0; index < this.results_serie.length; index++) { //for per ciclare dentro l'array di serie
                     const list_serie = this.results_serie[index];
-                    this.results.push(list_serie) //questa soluzione fa aparire la lista delle serie sotto della lista dei film, in tanto cosi
+                    this.results.push(list_serie) //questa soluzione fa aparire la lista delle serie sotto della lista dei film, in tanto
                 }
                 //console.log(this.results);
             })
@@ -46,8 +46,8 @@ export const store = reactive({
     getCastMovie(url){
         axios
         .get(url).then((response) => {
-            console.log(response.data.cast);
-            this.resultsCast.push(response.data.cast);
+            console.log(response.data);
+            this.resultsCast.push(response.data);
         })
         .catch((error) => {
             console.error(error);
