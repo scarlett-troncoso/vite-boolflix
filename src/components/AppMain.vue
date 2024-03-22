@@ -5,7 +5,7 @@ import AppCard from './AppCard.vue';
 export default {
     name: 'AppMain',
     components: {
-        AppCard
+        AppCard,
     },
 
     data() {
@@ -25,21 +25,24 @@ export default {
 
 <template>
     <main class="container"> 
+        <div class="message" v-if="store.results.length <= 0"> 
+            Without results, search for something
+        </div>
+
         <div class="row">
+            
             <ul v-for="result in store.results" :key="result.id + '_result'" class=" col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-3 card">
                 <div class="cont-img-film">
-
                     <img :src="result.poster_path === null ? url_no_img : url_img + result.poster_path" alt="poster:">
                     
                     <div class="contFilm">
                         <AppCard :result="result"></AppCard>
-                    </div>
-
-                </div>          
+                    </div>  
+                </div>    
             </ul>
         </div>
 
-        <div v-if="store.error">{{ store.error }}</div>
+        <div class="message" v-if="store.error">{{ "sorry we don't have that" }}</div>
     </main>
 </template>
 
@@ -47,6 +50,12 @@ export default {
 main{
     padding: 1.5rem 0 1.5rem 0;
     margin-bottom: 3rem;
+
+    > .message{
+        color: rgb(149, 149, 149);
+        font-size: 1.5rem;
+        font-weight: lighter;
+    }
 }
 
 img:hover{  

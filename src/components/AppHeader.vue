@@ -8,14 +8,15 @@ export default {
         return{
             store,
             url_logo: 'https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png',
+            searchMovieandSerie: '',
         }
     },
 
     methods: {
         filterResults() {
-            const url_movie = `${this.store.base_api_url}&query=${this.store.searchMovieandSerie}`;
-            const url_serie = `${this.store.base_api_url_serie}&query=${this.store.searchMovieandSerie}`;
-            console.log(this.store.searchMovieandSerie);
+            const url_movie = `${this.store.base_api_url}&query=${this.searchMovieandSerie}`;
+            const url_serie = `${this.store.base_api_url_serie}&query=${this.searchMovieandSerie}`;
+            console.log(this.searchMovieandSerie);
             this.store.getInfoCards(url_movie);
             this.store.getInfoCardsSerie(url_serie);
         },
@@ -32,7 +33,7 @@ export default {
             </div>
 
             <div class="cont-search">
-                <input type="text" placeholder=" Search Movie or Serie" v-model="store.searchMovieandSerie" @keyup.enter="filterResults" class="input-search">
+                <input type="text" placeholder=" Search Movie or Serie" v-model="this.searchMovieandSerie" @keyup.enter="filterResults" class="input-search">
                 <button @click="filterResults">Search</button>
             </div>
         </div>

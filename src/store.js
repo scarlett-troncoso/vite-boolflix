@@ -8,7 +8,6 @@ export const store = reactive({
     results: [],
     results_serie: {},
     error: false,
-    searchMovieandSerie: '',
     api_cast_serie: 'https://api.themoviedb.org/3/tv/{series_id}/credits?api_key=d7aac37017d487828e63f03c5d26591d',
     api_cast_movie: 'https://api.themoviedb.org/3/movie/', // {movie_id}/credits?api_key=d7aac37017d487828e63f03c5d26591d
     resultsCast: [],
@@ -43,11 +42,11 @@ export const store = reactive({
             })
     },
 
-    getCastMovie(url){
+    getCastMovie(url){ // Call ajax for Cast dates
         axios
         .get(url).then((response) => {
             console.log(response.data);
-            this.resultsCast.push(response.data);
+            this.resultsCast.push(response.data); 
         })
         .catch((error) => {
             console.error(error);

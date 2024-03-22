@@ -38,7 +38,7 @@ export default {
         
         <li class="overview" v-if="result.overview.length<235">Overview: {{ result.overview }}</li>
         <li class="overview" v-else >Overview: {{ result.overview.substring(0, 235) + "..." }}</li>
-       
+    
 </template>
 
 <style scoped>
