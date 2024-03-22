@@ -32,7 +32,7 @@ export default {
             </div>
 
             <div class="cont-search">
-                <input type="text" placeholder=" Search Movie or Serie" v-model="store.searchMovieandSerie" class="input-search">
+                <input type="text" placeholder=" Search Movie or Serie" v-model="store.searchMovieandSerie" @keyup.enter="filterResults" class="input-search">
                 <button @click="filterResults">Search</button>
             </div>
         </div>
