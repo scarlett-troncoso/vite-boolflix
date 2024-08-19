@@ -19,7 +19,9 @@ export default {
     created () {
         store.getInfoCards(store.base_api_url);
         store.getInfoCardsSerie(store.base_api_url_serie);
-    }
+    },
+
+    
 }
 </script>
 
@@ -32,6 +34,7 @@ export default {
         <div class="row">
             
             <ul v-for="result in store.results" :key="result.id + '_result'" class=" col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-3 card">
+                
                 <div class="cont-img-film">
                     <img :src="result.poster_path === null ? url_no_img : url_img + result.poster_path" alt="poster:">
                     
@@ -42,7 +45,7 @@ export default {
             </ul>
         </div>
 
-        <div class="message" v-if="store.error">{{ "sorry we don't have that" }}</div>
+        <div class="message" v-if="store.error">{{ store.error }}</div>
     </main>
 </template>
 
@@ -92,9 +95,5 @@ img:hover{
         color: rgb(178, 178, 178);
     }
 };
-
-
-
-
 
 </style>

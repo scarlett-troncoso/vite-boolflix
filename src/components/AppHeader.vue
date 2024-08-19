@@ -37,7 +37,7 @@ export default {
                 <button @click="filterResults">Search</button>
             </div>
         </div>
-        
+
     </header>
 </template>
 

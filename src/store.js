@@ -18,6 +18,7 @@ export const store = reactive({
             .get(url).then((response) => {
                 this.results = response.data.results
                 console.log(this.results);
+                this.error = false;
             })
             .catch((error) => {
                 console.error(error);
@@ -35,6 +36,7 @@ export const store = reactive({
                     this.results.push(list_serie) //questa soluzione fa aparire la lista delle serie sotto della lista dei film, in tanto
                 }
                 //console.log(this.results);
+                this.error = false;
             })
             .catch((error) => {
                 console.error(error);
